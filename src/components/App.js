@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-
 const MENU_DATA = [
   {
     id: 1,
