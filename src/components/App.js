@@ -75,22 +75,100 @@ const MENU_DATA = [
   },
 ];
 
+// const Menu = () => {
+//   const [list, setlist] = useState(MENU_DATA);
+
+//   const onFilter = (category) => {
+//     if (category === "all") {
+//       setlist(MENU_DATA);
+//     } else {
+//       const matches = MENU_DATA.filter((i) => i.category === category);
+
+//       setlist(matches);
+//     }
+//   };
+//   return (
+//     <div id="main">
+//       <h1>Our Menu</h1>
+
+//       <div>
+//         <button id="filter-btn-0" onClick={() => onFilter("all")}>
+//           All
+//         </button>
+//         <button id="filter-btn-1" onClick={() => onFilter("breakfast")}>
+//           Breakfast
+//         </button>
+//         <button id="filter-btn-2" onClick={() => onFilter("lunch")}>
+//           Lunch
+//         </button>
+//         <button id="filter-btn-3" onClick={() => onFilter("shakes")}>
+//           Shakes
+//         </button>
+//       </div>
+
+//       <div>
+//         {list.map((i) => (
+//           <div
+//             data-test-id={
+//               i.category === "breakfast"
+//                 ? "menu-item-breakfast"
+//                 : i.category === "lunch"
+//                 ? "menu-item-lunch"
+//                 : "menu-item-shakes"
+//             }
+//             key={i.id}
+//           >
+//             <div>
+//               <img src={i.img} alt={i.title} />
+//             </div>
+//             <div>
+//               <div>
+//                 <span>{i.title}</span>
+//                 <span>{i.price}</span>
+//               </div>
+//               <div>{i.desc}</div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Menu;
+
+const MenuItem = ({ item }) => {
+  return (
+    <div data-test-id={`menu-item-${item.category}`} key={item.id}>
+      <div>
+        <img src={item.img} alt={item.title} />
+      </div>
+      <div>
+        <div>
+          <span>{item.title}</span>
+          <span>{item.price}</span>
+        </div>
+        <div>{item.desc}</div>
+      </div>
+    </div>
+  );
+};
+
 const Menu = () => {
-  const [list, setlist] = useState(MENU_DATA);
+  const [list, setList] = useState(MENU_DATA);
 
   const onFilter = (category) => {
     if (category === "all") {
-      setlist(MENU_DATA);
+      setList(MENU_DATA);
     } else {
       const matches = MENU_DATA.filter((i) => i.category === category);
-
-      setlist(matches);
+      setList(matches);
     }
   };
+
   return (
     <div id="main">
       <h1>Our Menu</h1>
-
       <div>
         <button id="filter-btn-0" onClick={() => onFilter("all")}>
           All
@@ -105,30 +183,9 @@ const Menu = () => {
           Shakes
         </button>
       </div>
-
       <div>
-        {list.map((i) => (
-          <div
-            data-test-id={
-              i.category === "breakfast"
-                ? "menu-item-breakfast"
-                : i.category === "lunch"
-                ? "menu-item-lunch"
-                : "menu-item-shakes"
-            }
-            key={i.id}
-          >
-            <div>
-              <img src={i.img} alt={i.title} />
-            </div>
-            <div>
-              <div>
-                <span>{i.title}</span>
-                <span>{i.price}</span>
-              </div>
-              <div>{i.desc}</div>
-            </div>
-          </div>
+        {list.map((item) => (
+          <MenuItem item={item} />
         ))}
       </div>
     </div>
